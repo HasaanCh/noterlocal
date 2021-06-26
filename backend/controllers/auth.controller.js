@@ -1,10 +1,8 @@
 const nodemailer = require("nodemailer");
 const User = require('../models/auth.model');
-const expressJwt = require('express-jwt');
 const _ = require('lodash');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const expressJWT = require('express-jwt');
 const { errorHandler } = require('../helpers/dbErrorHandling');
 
   const transporter = nodemailer.createTransport({
