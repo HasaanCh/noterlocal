@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Link,Redirect} from 'react-router-dom';
 import { signout } from '../helpers/auth';
+import { authenticate, isAuth } from '../helpers/auth';
 
 
 
@@ -20,13 +21,11 @@ export default class Navbar extends Component
             
                 <div className="right-header">
                     <div className="items">
-                            <div className="profile item-header">
-                                <Link to="/" className="notes-link">Notes</Link>
-                    </div>
-                    <div className="profile item-header">
+                    {isAuth() ? null :  <div className="profile item-header">
                                 <Link to="/register" className="notes-link">Register</Link>
-                    </div>
-                    <div className="profile item-header">
+                    </div>}
+    
+                    {isAuth() ?  <div className="profile item-header">
                             <button
                         onClick={() => {
                             signout(() => {
@@ -36,7 +35,8 @@ export default class Navbar extends Component
                         }}
                         >Logout
                             </button>
-                    </div>
+                    </div> : null}
+                   
                    
                     </div>
                 </div>

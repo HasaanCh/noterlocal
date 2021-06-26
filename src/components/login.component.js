@@ -16,7 +16,12 @@ export default class Login extends Component
         this.state={
             email:"",
             password:"",
+            loginbuttontext:"Login",
+            loginnotification:"Wrong Email or Password",
+            notiifactionshown:"hidden"
         };
+
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
     onChange=(e)=>
@@ -39,7 +44,8 @@ export default class Login extends Component
     {
         console.log(e);
         e.preventDefault();
-
+        this.setState({notiifactionshown:"hidden"});
+        this.setState({loginbuttontext:"Please Wait"});
         axios.post(`http://localhost:5000/api/login`,{
             email:e.target[0].value,
             password:e.target[1].value
@@ -47,8 +53,13 @@ export default class Login extends Component
             authenticate(res);
             var win = window.open('/',"_self");
             win.focus();
+            this.setState({loginbuttontext:"Login"})
             // toast.success(`Hey ${res.data.user.name}, Welcome back!`);
-        }).catch(error=>console.log(error))
+        }).catch(error=>{console.log(error);
+          this.setState({loginbuttontext:"Login"});
+          this.setState({notiifactionshown:"shown"});
+          // this.setState()
+        })
     }
 
 
@@ -57,7 +68,7 @@ export default class Login extends Component
     {
         return(
             
-        <div>
+        <div className="custom-form">
             {isAuth() ? <Redirect to='/' /> : null}
             {/* <ToastContainer /> */}
             <form
@@ -80,9 +91,9 @@ export default class Login extends Component
                 />
                 <button
                   type='submit'            >
-                  <span className='ml-3'>Sign In</span>
+                  <span className='ml-3'>{this.state.loginbuttontext}</span>
                 </button>
-                
+                <div className={"custom-info "+this.state.notiifactionshown}>{this.state.loginnotification}</div>
               </form>
         </div>
         )

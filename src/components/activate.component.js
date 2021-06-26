@@ -24,14 +24,15 @@ export default class Activate extends Component
 
 
 
+
     handleSubmit(e)
     {
         let token = this.props.match.params.token;
         console.log(token);
         e.preventDefault();
-        let {name}=jwt.decode(token);
-        this.setState({infoclass:"shown"});
-        this.setState({infotext:name})
+        // let {name}=jwt.decode(token);
+        // this.setState({infoclass:"shown"});
+        // this.setState({infotext:name})
         axios.post(`http://localhost:5000/api/activation`, {
           token
         })
