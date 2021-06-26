@@ -3,7 +3,6 @@ const User = require('../models/auth.model');
 const _ = require('lodash');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
-const { errorHandler } = require('../helpers/dbErrorHandling');
 
   const transporter = nodemailer.createTransport({
     host: "smtp.ionos.com",
