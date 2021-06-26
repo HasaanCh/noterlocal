@@ -24,7 +24,6 @@ export default class Activate extends Component
 
 
 
-
     handleSubmit(e)
     {
         let token = this.props.match.params.token;
