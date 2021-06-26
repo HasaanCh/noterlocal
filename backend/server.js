@@ -10,7 +10,6 @@ require('dotenv').config(
 
 const app=express();
 const port=process.env.PORT || 5000;
-const userRouter=require('./routes/user.route');
 const notesRouter=require('./routes/notes');
 const authRouter=require('./routes/auth.route');
 
@@ -30,10 +29,7 @@ connection.once('open',()=>
 
 
 app.use('/notes',notesRouter);
-// app.use('/users',userRouter);
-// app.use('/register',authenticRouter);
-app.use('/api', authRouter)
-app.use('/api', userRouter)
+app.use('/api', authRouter);
 app.use((req, res) => {
     res.status(404).json({
         success: false,
